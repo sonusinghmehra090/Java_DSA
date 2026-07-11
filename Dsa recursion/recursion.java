@@ -159,6 +159,83 @@ public class recursion{
         return OptimisedHalfPower;
     }
 
+    public static int LoopedLastOccurance(int arr[],int key){
+        for (int i=0;i<=arr.length-1;i++){
+            if (arr[arr.length-1-i]==key){
+                return arr.length-1-i;
+            }
+        }
+        return -1;
+    }
+
+    //  ---------- Question 13 ---------- //
+    
+    public static int TilingProblem(int n){
+        // base case 
+        if (n==1||n==0){
+            return 1;
+        }
+        // vertical choice 
+        int vert = TilingProblem(n-1);
+
+        // horizontal case
+        int horiz = TilingProblem(n-2);
+
+        // Total ways 
+        int TotWays = vert + horiz;
+        return TotWays;
+    }
+
+    //  ---------- Question 14 ---------- //
+    
+    public static void RemoveDuplicate(String str, int idx, StringBuilder newStr, boolean map[]){
+        // base case 
+        if (idx == str.length()){
+            System.out.print(newStr);
+            return;
+        }
+        char ch=str.charAt(idx);
+        if (map[ch-'a']==true){
+            RemoveDuplicate(str, idx+1,newStr,map);
+        }
+        else{
+            map[ch-'a']=true;
+            RemoveDuplicate(str, idx+1,newStr.append(ch),map);
+        }
+    }
+    public static void LoopedRemovedDuplicate(String str,boolean arr[]){
+        StringBuilder newStr = new StringBuilder("");
+        for (int i=0;i<str.length();i++){
+            char ch = str.charAt(i);
+            if (arr[ch-'a']==true){
+                continue;
+            }
+            else{
+                arr[ch-'a']=true;
+                newStr.append(ch);
+            }
+        }
+        System.out.println(newStr);
+    }
+    public static void BinaryString(int n,int lastplace,String str){
+    //                              (2 , '0' , 0)
+        // base case 
+        if (n==0){
+            System.out.println(str);
+            return;
+        }
+        if (lastplace==0){ 
+            BinaryString(n-1,0,str+"0");
+            BinaryString(n-1,1,str+"1");
+        }
+        else{
+            BinaryString(n-1,0,str+"0");     
+        }
+        // BinaryString(n-1,str+="0",0);
+        // if (lastplace==0){
+        //     BinaryString(n-1,str+="1",1);
+        // }
+    }
     public static void main(String args[]){
         Scanner sc = new Scanner(System.in);
         // System.out.print("Enter number : ");
@@ -170,8 +247,8 @@ public class recursion{
         // System.out.print(Fact(num));
         // IncOrder(num);
         // int value = FibonacciNum(num);
-        int arr[] = {5,5,5};
-        int key = 5;
+        int arr[] = {5,5,5,29,19,5};
+        int key = 50;
         int x = 2;
         int n = 5;
         // boolean value = isSorted(arr,0);
@@ -181,8 +258,19 @@ public class recursion{
         // System.out.println(LastValue);
         // int value = power(x,n);
         // System.out.println(value);
-        int value = OptimisedPower(x,n);
-        System.out.println(value);
+        // int value = OptimisedPower(x,n);
+        // System.out.println(value);
+        // int value = LoopedLastOccurance(arr,key);
+        // System.out.println(value);
+        // int value = TilingProblem(n);
+        // System.out.println(value);
+        String str = "sonusingh";
+        // RemoveDuplicate(str,0,new StringBuilder(""), new boolean[26]);
+        // LoopedRemovedDuplicate(str,new boolean[26]);
+        BinaryString(3,0,"");
         sc.close();
     }
 }
+
+
+// 0 1 n=3  000 001 010 100 101 
